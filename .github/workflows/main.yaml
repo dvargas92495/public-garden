@@ -9,5 +9,5 @@ jobs:
       uses: actions/generate-roam-site-action@v1
       with:
         roam-username: dvargas92495@gmail.com
-        roam-password: {{ secrets.ROAM_PASSWORD }}
+        roam-password: ${{ secrets.ROAM_PASSWORD }}
         roam-graph: dvargas92495
