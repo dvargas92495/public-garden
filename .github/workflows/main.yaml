@@ -1,13 +1,24 @@
 on: [push]
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOY_AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOY_AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-    - name: Generate HTML From Roam
-      uses: dvargas92495/generate-roam-site-action@v1.3.3
-      with:
-        roam_username: dvargas92495@gmail.com
-        roam_password: ${{ secrets.ROAM_PASSWORD }}
-        roam_graph: dvargas92495
+      - name: Generate HTML From Roam
+        uses: dvargas92495/generate-roam-site-action@v1.3.3
+        with:
+          roam_username: dvargas92495@gmail.com
+          roam_password: ${{ secrets.ROAM_PASSWORD }}
+          roam_graph: dvargas92495
+      - name: Upload to AWS
+        run: aws s3 sync out s3://garden.davidvargas.me --delete
+      - name: Invalidate Cache
+        run: |
+          CLOUDFRONT_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[*].{Alias:Aliases.Items[0],Id:Id}[?Alias=='garden.davidvargas.me'].Id" --output text)
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"

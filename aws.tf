@@ -26,3 +26,15 @@ module "aws-static-site" {
     Application = "Public Garden"
   }
 }
+
+resource "github_actions_secret" "deploy_aws_access_key" {
+  repository       = "floss"
+  secret_name      = "DEPLOY_AWS_ACCESS_KEY_ID"
+  plaintext_value  = module.aws-static-site.deploy-id
+}
+
+resource "github_actions_secret" "deploy_aws_access_secret" {
+  repository       = "floss"
+  secret_name      = "DEPLOY_AWS_SECRET_ACCESS_KEY"
+  plaintext_value  = module.aws-static-site.deploy-secret
+}
