@@ -6,11 +6,11 @@ jobs:
     name: Deploy
     steps:
     - name: ls
-      runs: ls -al / 
+      run: ls -al /
     - name: ls 1
-      runs: ls -al /usr
+      run: ls -al /usr
     - name: ls 2
-      runs: ls -al /usr/bin  
+      run: ls -al /usr/bin
     - name: Generate HTML From Roam
       uses: dvargas92495/generate-roam-site-action@v1.3.2
       with:
