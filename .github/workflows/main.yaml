@@ -11,7 +11,7 @@ jobs:
     name: Deploy
     steps:
       - name: Generate HTML From Roam
-        uses: dvargas92495/generate-roam-site-action@1.9.1
+        uses: dvargas92495/generate-roam-site-action@2.0.0
         with:
           roam_username: dvargas92495@gmail.com
           roam_password: ${{ secrets.ROAM_PASSWORD }}
