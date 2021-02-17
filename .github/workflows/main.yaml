@@ -16,6 +16,7 @@ jobs:
           roam_username: dvargas92495@gmail.com
           roam_password: ${{ secrets.ROAM_PASSWORD }}
           roam_graph: dvargas92495
+          config_path: garden.json
       - name: Upload to AWS
         run: aws s3 sync out s3://garden.davidvargas.me --delete
       - name: Invalidate Cache
