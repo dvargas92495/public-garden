@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
+      - uses: actions/checkout@v2
       - name: Generate HTML From Roam
         uses: dvargas92495/generate-roam-site-action@2.5.2
         with:
