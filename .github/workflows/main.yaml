@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Generate HTML From Roam
-        uses: dvargas92495/roamjs-static-site@2022-01-20-21-47
+        uses: dvargas92495/roamjs-static-site@2022-01-20-21-50
         with:
           roam_username: dvargas92495@gmail.com
           roam_password: ${{ secrets.ROAM_PASSWORD }}
